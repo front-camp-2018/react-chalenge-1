@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {usersJSON} from '../data';
+import {userData} from '../data';
+import Users from './Users';
 
 export default class Table extends Component {
 
@@ -14,6 +15,7 @@ export default class Table extends Component {
 						<th>Points</th>
 						<th>Rank</th>
 					</tr>
+					<Users usersData={userData} sortBy={this.props.sortBy}></Users>
 				</thead>
 				<tbody></tbody>
 			</table>

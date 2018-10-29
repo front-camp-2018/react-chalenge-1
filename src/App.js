@@ -6,6 +6,18 @@ import Rank from './components/Rank';
 import Table from './components/Table';
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sortBy: null,
+    };
+  }
+
+  handleSorting (type) {
+    this.setState({
+      sortBy: type,
+    })
+  }
 
   render() {
     return (
@@ -14,13 +26,13 @@ export default class App extends Component {
           <h1>Leaderboard</h1>
         </header>
         <div className="text-center buttons">
-          <Age></Age>
-          <Name></Name>
-          <Points></Points>
-          <Rank></Rank>
+          <Age onClick={()=>{this.handleSorting('age')}}></Age>
+          <Name onClick={()=>{this.handleSorting('name')}}></Name>
+          <Points onClick={()=>{this.handleSorting('points')}}></Points>
+          <Rank onClick={()=>{this.handleSorting('rank')}}></Rank>
         </div>
         <div className="text-center buttons">
-          <Table></Table>
+          <Table sortBy={this.state.sortBy}></Table>
         </div>
       </div>
     );

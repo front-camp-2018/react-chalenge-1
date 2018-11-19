@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
-import Age from './components/Age';
-import Name from './components/Name';
-import Points from './components/Points';
-import Rank from './components/Rank';
-import Table from './components/Table';
+import {userData} from './data';
+import SortedTable from './components/SortedTable';
 
 export default class App extends Component {
 
-  render() {
-    return (
-      <div className="text-center buttons">
-        <header className="text-center">
-          <h1>Leaderboard</h1>
-        </header>
-        <div className="text-center buttons">
-          <Age></Age>
-          <Name></Name>
-          <Points></Points>
-          <Rank></Rank>
-        </div>
-        <div className="text-center buttons">
-          <Table></Table>
-        </div>
-      </div>
-    );
-  }
+    constructor () {
+        super();
+        this.userData = this.addIdToData(userData);
+    }
+
+    addIdToData = (arr) => {
+        return [...arr].map((item, idx) => Object.assign(item, {id: idx}))
+    };
+
+    dataStructure = [
+        { name: 'age', title: 'Age', sortOrder: 1 }, // sortOrder: 1 -  increasing; 0 - don't sort; -1 - decreasing
+        { name: 'name', title: 'Name', sortOrder: 1 },
+        { name: 'points', title: 'Points', sortOrder: -1 },
+        { name: 'rank', title: 'Rank', sortOrder: 1 }
+    ];
+
+    render() {
+        return (
+             <SortedTable
+                 data = {this.userData}
+                 dataStructure = {this.dataStructure}
+             />
+        );
+    }
 }
 

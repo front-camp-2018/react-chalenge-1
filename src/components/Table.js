@@ -1,22 +1,32 @@
-import React, {Component} from 'react';
-import {usersJSON} from '../data';
+import React from 'react';
 
-export default class Table extends Component {
+const Table = (props) => {
 
-	render() {
- 
-		return (<div>
+	const header = props.dataStructure
+		.map( item =>  <th key = {item.name}>{item.title}</th>);
+
+	const body = props.data
+		.map( item => {
+			const row = props.dataStructure
+				.map(property => <td key = {property.name}>{item[property.name]}</td>);
+        	return  (<tr key = {item.id}>{ row }</tr>);
+		});
+
+	return (
+		<div>
 			<table className="table table-striped">
 				<thead>
-					<tr key="head">
-						<th>Age</th>
-						<th>Name</th>
-						<th>Points</th>
-						<th>Rank</th>
+					<tr>
+						{header}
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody>
+					{body}
+				</tbody>
 			</table>
-		</div>)
-	}
-}
+		</div>
+	)
+
+};
+
+export default Table;

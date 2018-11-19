@@ -6,6 +6,16 @@ import Rank from './components/Rank';
 import Table from './components/Table';
 
 export default class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      filterBy: ''
+    }
+  }
+
+  changeFilter = (value) => {
+    this.setState({ filterBy: value });
+  }
 
   render() {
     return (
@@ -14,16 +24,15 @@ export default class App extends Component {
           <h1>Leaderboard</h1>
         </header>
         <div className="text-center buttons">
-          <Age></Age>
-          <Name></Name>
-          <Points></Points>
-          <Rank></Rank>
+          <Age changeFilter={this.changeFilter}></Age>
+          <Name changeFilter={this.changeFilter}></Name>
+          <Points changeFilter={this.changeFilter}></Points>
+          <Rank changeFilter={this.changeFilter}></Rank>
         </div>
         <div className="text-center buttons">
-          <Table></Table>
+          <Table filterBy={this.state.filterBy}></Table>
         </div>
       </div>
     );
   }
 }
-

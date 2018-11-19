@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Name = ({}) => (
-  <button className="btn btn-primary name" name="name">Name</button>
+const Name = ({ changeFilter }) => (
+  <button className="btn btn-primary name" onClick={(e) => changeFilter(e.target.name)} name="name">Name</button>
 );
 
 export default Name;
